@@ -1,10 +1,5 @@
 package co.com.claro.WsCreateDataLocation.utils;
 
-import co.com.claro.WsCreateDataLocation.entity.User;
-
-import java.util.Random;
-import java.util.UUID;
-
 import static java.lang.String.format;
 
 public class TestHelper {

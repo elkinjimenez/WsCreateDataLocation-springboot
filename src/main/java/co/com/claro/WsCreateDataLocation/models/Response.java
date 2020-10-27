@@ -1,22 +1,22 @@
 package co.com.claro.WsCreateDataLocation.models;
 
+import co.com.claro.WsCreateDataLocation.entity.DatosUbicacion;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 public class Response {
-    @Getter
-    @Setter
-    private Boolean isValid;
 
-    @Getter
-    @Setter
-    private String description;
+    private ResponseGeneral response;
 
-    public Response() {
+    private List<DatosUbicacion> dataLocation;
+
+    public void setResponse(ResponseGeneral response) {
+        this.response = response;
     }
 
-    public Response(Boolean isValid, String description) {
-        this.isValid = isValid;
-        this.description = description;
+    public void setDataLocation(List<DatosUbicacion> dataLocation) {
+        this.dataLocation = dataLocation;
     }
 }

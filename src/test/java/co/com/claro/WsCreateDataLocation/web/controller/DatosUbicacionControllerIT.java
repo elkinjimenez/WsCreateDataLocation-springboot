@@ -1,23 +1,8 @@
 package co.com.claro.WsCreateDataLocation.web.controller;
 
-import co.com.claro.WsCreateDataLocation.entity.User;
-import co.com.claro.WsCreateDataLocation.repo.UserRepository;
 import co.com.claro.WsCreateDataLocation.utils.BaseIntegrationTest;
-import co.com.claro.WsCreateDataLocation.utils.TestHelper;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 
-import java.util.List;
-
-import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.OK;
 
 public class DatosUbicacionControllerIT extends BaseIntegrationTest {
 /*
