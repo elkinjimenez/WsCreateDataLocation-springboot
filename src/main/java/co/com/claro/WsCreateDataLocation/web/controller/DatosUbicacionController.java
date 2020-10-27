@@ -1,7 +1,7 @@
 package co.com.claro.WsCreateDataLocation.web.controller;
 
 import co.com.claro.WsCreateDataLocation.entity.DatosUbicacion;
-import co.com.claro.WsCreateDataLocation.models.Response;
+import co.com.claro.WsCreateDataLocation.models.ResponseDataLocation;
 import co.com.claro.WsCreateDataLocation.models.ResponseGeneral;
 import co.com.claro.WsCreateDataLocation.service.DatosUbicacionService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,26 +23,24 @@ public class DatosUbicacionController {
         this.datosUbicacion = datosUbicacion;
     }
 
-    @GetMapping("queryDataLocation")
-    public ResponseEntity<DatosUbicacion> queryDataLocation(@RequestParam String numeroIdentificacion, @RequestParam  String tipoIdentificacion) {
-        Optional<DatosUbicacion> datos = this.datosUbicacion.findByDocAndType(numeroIdentificacion, tipoIdentificacion);
-        if(datos == null){
-            return null;
-        }else{
-            return datos.map( u -> ResponseEntity.ok(u))
-                    .orElse(ResponseEntity.notFound().build());
-        }
-
-    }
-
-    @GetMapping("example")
-    public Response example(@RequestParam String numeroIdentificacion, @RequestParam  String tipoIdentificacion) {
-        Response response = new Response();
+    @GetMapping("/queryDataLocation")
+    public ResponseDataLocation queryDataLocation(@RequestParam String documentNumber, @RequestParam String documentType) {
+        ResponseDataLocation response = new ResponseDataLocation();
         try {
-            ResponseGeneral  responseG = new ResponseGeneral(true, "Correcto");
-            response.setResponse(responseG);
-        }catch (Exception e){
-            ResponseGeneral  responseG = new ResponseGeneral(false, "Error: "+ e.getMessage());
+            documentType = documentType.replaceAll("\"", "").replaceAll("\'", "");
+            documentNumber = documentNumber.replaceAll("\"", "").replaceAll("\'", "");
+            Optional<DatosUbicacion> listado = this.datosUbicacion.findByDocAndType(documentNumber, documentType);
+            if (listado != null) {
+                response.setDataLocation(listado);
+                ResponseGeneral responseG = new ResponseGeneral(true, "Usuario encontrado satisfactoriamente.");
+                response.setResponse(responseG);
+            } else {
+                response.setDataLocation(null);
+                ResponseGeneral responseG = new ResponseGeneral(false, "El usuario no se encuentra dentro de los registros almacenados.");
+                response.setResponse(responseG);
+            }
+        } catch (Exception e) {
+            ResponseGeneral responseG = new ResponseGeneral(false, "No se logró consultar el usuario con los datos enviados. Detalle: " + e.getMessage());
             response.setResponse(responseG);
         }
         return response;
