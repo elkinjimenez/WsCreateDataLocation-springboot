@@ -860,4 +860,19 @@ public class DatosUbicacion implements Serializable {
   @Column(name = "FECHA_CARGUE")
   private Timestamp fechaCargue;
 
+  public String getTipoIdentificacion() {
+    return tipoIdentificacion;
+  }
+
+  public void setTipoIdentificacion(String tipoIdentificacion) {
+    this.tipoIdentificacion = tipoIdentificacion;
+  }
+
+  public String getNumeroIdentificacion() {
+    return numeroIdentificacion;
+  }
+
+  public void setNumeroIdentificacion(String numeroIdentificacion) {
+    this.numeroIdentificacion = numeroIdentificacion;
+  }
 }

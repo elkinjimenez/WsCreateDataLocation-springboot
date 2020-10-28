@@ -12,20 +12,32 @@ import java.util.Optional;
 @Service
 public class DatosUbicacionService {
 
-    private  final DatosUbicacionRepository datos;
+    private final DatosUbicacionRepository datos;
 
     @Autowired
-    public DatosUbicacionService (DatosUbicacionRepository datos){
+    public DatosUbicacionService(DatosUbicacionRepository datos) {
         this.datos = datos;
     }
 
-    public Optional<DatosUbicacion> findByDocAndType(String numeroIdentificacion, String tipoIdentificacion){
-        Optional<DatosUbicacion> listado =this.datos.findByNumeroIdentificacionAndTipoIdentificacion(numeroIdentificacion,tipoIdentificacion);
-        if(listado.isPresent()){
+    public Optional<DatosUbicacion> findByDocAndType(String numeroIdentificacion, String tipoIdentificacion) {
+        Optional<DatosUbicacion> listado = this.datos.findByNumeroIdentificacionAndTipoIdentificacion(numeroIdentificacion, tipoIdentificacion);
+        if (listado.isPresent()) {
             return listado;
-        }else{
+        } else {
             return null;
         }
+    }
+
+    public DatosUbicacion create(DatosUbicacion datosUbicacion) {
+        return datos.save(datosUbicacion);
+    }
+
+    public DatosUbicacion update(DatosUbicacion datosUbicacion) {
+        return datos.save(datosUbicacion);
+    }
+
+    public void remove (String numeroIdentificacion){
+        this.datos.deleteById(numeroIdentificacion);
     }
 
 }

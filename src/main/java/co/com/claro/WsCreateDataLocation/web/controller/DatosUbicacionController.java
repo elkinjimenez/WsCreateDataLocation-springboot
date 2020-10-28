@@ -46,20 +46,50 @@ public class DatosUbicacionController {
     }
 
     @PostMapping("/createDataLocation")
-    public ResponseDataLocation createDataLocation(DatosUbicacion objetoDatos) {
+    public ResponseDataLocation createDataLocation(@RequestBody DatosUbicacion objetoDatos) {
         ResponseDataLocation response = new ResponseDataLocation();
         try {
+            datosUbicacion.create(objetoDatos);
             ResponseGeneral responseG = new ResponseGeneral(true, "Usuario creado satisfactoriamente.");
+            response.setResponse(responseG);
         } catch (Exception e) {
-            ResponseGeneral responseG = new ResponseGeneral(false, "No se logró crear el usuario.");
+            ResponseGeneral responseG = new ResponseGeneral(false, "No se logró crear el usuario. Detalle: " + e.getMessage());
+        }
+        return response;
+    }
+
+    @PutMapping("/updateDataLocation")
+    public ResponseDataLocation updateDataLocation(@RequestBody DatosUbicacion objetoDatos) {
+        ResponseDataLocation response = new ResponseDataLocation();
+        try {
+            Optional<DatosUbicacion> existo = datosUbicacion.findByDocAndType(objetoDatos.getNumeroIdentificacion(), objetoDatos.getTipoIdentificacion());
+            if (existo.isPresent()) {
+                datosUbicacion.update(objetoDatos);
+                ResponseGeneral responseG = new ResponseGeneral(true, "Usuario actualizado satisfactoriamente.");
+                response.setResponse(responseG);
+            } else {
+                ResponseGeneral responseG = new ResponseGeneral(false, "El usuario que se desea actualizar no existe.");
+                response.setResponse(responseG);
+            }
+        } catch (Exception e) {
+            ResponseGeneral responseG = new ResponseGeneral(false, "No se logró actualizar el usuario. Detalle: " + e.getMessage());
         }
 
         return response;
     }
 
-    @PutMapping("/updateDataLocation")
-    public String updateDataLocation() {
-        return "Actualizando data location";
+    @DeleteMapping("/deleteNoMostrar")
+    public ResponseGeneral deleteNoMostrar(@RequestParam String documentNumber) {
+        ResponseGeneral response = new ResponseGeneral();
+        try {
+            datosUbicacion.remove(documentNumber);
+            response.setValid(true);
+            response.setDescription("Eliminado");
+        } catch (Exception e) {
+            response.setValid(false);
+            response.setDescription("Error eliminar: " + e.getMessage());
+        }
+        return response;
     }
 
 }
