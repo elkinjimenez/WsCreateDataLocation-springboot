@@ -6,7 +6,6 @@ import co.com.claro.WsCreateDataLocation.models.ResponseGeneral;
 import co.com.claro.WsCreateDataLocation.service.DatosUbicacionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -44,6 +43,23 @@ public class DatosUbicacionController {
             response.setResponse(responseG);
         }
         return response;
+    }
+
+    @PostMapping("/createDataLocation")
+    public ResponseDataLocation createDataLocation(DatosUbicacion objetoDatos) {
+        ResponseDataLocation response = new ResponseDataLocation();
+        try {
+            ResponseGeneral responseG = new ResponseGeneral(true, "Usuario creado satisfactoriamente.");
+        } catch (Exception e) {
+            ResponseGeneral responseG = new ResponseGeneral(false, "No se logró crear el usuario.");
+        }
+
+        return response;
+    }
+
+    @PutMapping("/updateDataLocation")
+    public String updateDataLocation() {
+        return "Actualizando data location";
     }
 
 }
