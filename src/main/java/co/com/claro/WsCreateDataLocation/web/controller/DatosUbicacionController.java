@@ -78,6 +78,7 @@ public class DatosUbicacionController {
         return response;
     }
 
+    /*
     @DeleteMapping("/deleteNoMostrar")
     public ResponseGeneral deleteNoMostrar(@RequestParam String documentNumber) {
         ResponseGeneral response = new ResponseGeneral();
@@ -91,5 +92,6 @@ public class DatosUbicacionController {
         }
         return response;
     }
+     */
 
 }
