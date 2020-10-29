@@ -63,7 +63,7 @@ public class DatosUbicacionController {
         ResponseDataLocation response = new ResponseDataLocation();
         try {
             Optional<DatosUbicacion> existo = datosUbicacion.findByDocAndType(objetoDatos.getNumeroIdentificacion(), objetoDatos.getTipoIdentificacion());
-            if (existo.isPresent()) {
+            if (existo != null) {
                 datosUbicacion.update(objetoDatos);
                 ResponseGeneral responseG = new ResponseGeneral(true, "Usuario actualizado satisfactoriamente.");
                 response.setResponse(responseG);

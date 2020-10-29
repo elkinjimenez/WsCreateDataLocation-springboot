@@ -11,7 +11,8 @@ public class ResponseGeneral {
 
     private String description;
 
-    public ResponseGeneral(){}
+    public ResponseGeneral() {
+    }
 
     public ResponseGeneral(Boolean isValid, String description) {
         this.isValid = isValid;
@@ -26,11 +27,11 @@ public class ResponseGeneral {
         this.description = description;
     }
 
-    public Boolean getValid() {
+    public Boolean getIsValid() {
         return isValid;
     }
 
-    public void setValid(Boolean valid) {
-        isValid = valid;
+    public void setIsValid(Boolean isValid) {
+        isValid = isValid;
     }
 }
